@@ -11,17 +11,34 @@ class TitledParagraph extends HTMLElement {
     });
   }
 
+  /*
+    "reacting" to attributes && attr changes
+  */
+  static get observedAttributes(){
+    /*
+      The browser will call this method
+       for every change to attributes
+        listed in the observedAttributes array.
+    */
+    return ['title', 'txt']
+  }
+
+  attributeChangedCallback(attrName, oldVal, newVal){
+    console.log('%c attr-changed-cb', 'background-color: orange; color: white;')
+    if(attrName === 'title'){
+      this.titleVal = newVal
+    }
+
+    if(attrName === 'txt'){
+      this.textVal = newVal
+    }
+  }
+
   connectedCallback(){
     console.log('conn cb');
     this.innerHTML = `<section class="titled-paragraph">
-      <h3 class="paragraph-title">Demo Title</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-      Phasellus non nunc aliquam, mattis felis eu, mattis augue. 
-      Quisque semper aliquet augue non efficitur. 
-      Proin sit amet tellus et mi varius gravida non vitae neque. 
-      Aenean interdum euismod magna, nec venenatis turpis efficitur mollis. 
-      Pellentesque pulvinar justo a lobortis egestas. Duis sed dapibus mauris. Suspendisse imperdiet posuere malesuada. Vestibulum tempor lacus eget enim fringilla, ut porta erat dictum. 
-      Suspendisse gravida dui turpis, faucibus elementum nisi bibendum sodales.</p>
+      <h3 class="paragraph-title">${this.titleVal || 'TITLE'}</h3>
+      <p>${this.textVal || 'TEXT'}</p>
     </section>`
   }
 }
