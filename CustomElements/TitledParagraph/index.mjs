@@ -4,6 +4,7 @@ class TitledParagraph extends HTMLElement {
    ...specific to CE and required by the spec.
   */
   constructor() {
+    console.log('constructor');
     super();
     this.addEventListener('click', e => {
       this.logText();
@@ -11,7 +12,8 @@ class TitledParagraph extends HTMLElement {
   }
 
   connectedCallback(){
-    this.innerHtml = `<section class="titled-paragraph">
+    console.log('conn cb');
+    this.innerHTML = `<section class="titled-paragraph">
       <h3 class="paragraph-title">Demo Title</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
       Phasellus non nunc aliquam, mattis felis eu, mattis augue. 
